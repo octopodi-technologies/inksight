@@ -10,8 +10,7 @@ Unlike traditional grading tools that only check whether code works or detect pl
 
 ## Awards
 
-![Alt text](./assets/partners/ripen.svg)
-<img src="./assets/partners/ripen.svg">
-
 ## Partners
+
+![Alt text](./assets/partners/ripen.svg)
 

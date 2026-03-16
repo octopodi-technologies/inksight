@@ -1,5 +1,9 @@
 <img src="assets/banner/octopodi_inksight_banner.svg" alt="Octopodi Inksight" />
 
+[![status](https://img.shields.io/badge/status-stable-blue.svg)](https://github.com/octopodi-technologies/inksight/releases/latest/)
+[![release](https://img.shields.io/badge/release-latest-ebc95b.svg)](https://github.com/octopodi-technologies/inksight/releases/latest/)
+[![website](https://img.shields.io/badge/website-octopodi.com-8c52ff.svg)](https://www.octopodi.com)
+
 Where AI Meets Instructor Insight.
 
 ## Introduction

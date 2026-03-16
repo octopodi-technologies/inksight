@@ -1,0 +1,39 @@
+name: "✨Feature Request"
+description: it would be nice...
+title: "[Enhancement]: "
+labels: ["triage", "enhancement"]
+body:
+  - type: checkboxes
+    id: os-type
+    attributes:
+      label: Operating System
+      description: What operating system are you running? Select all that apply.
+      options:
+        - label: All
+        - label: Windows 11
+        - label: Windows 10
+        - label: MacOs Tahoe (Current)
+        - label: MacOs Sequoia
+        - label: MacOs Sonoma
+        - label: Linux Debian
+        - label: Linux RHEL (fedora, etc)
+        - label: Linux Arch
+    validations:
+      required: true
+
+  - type: textarea
+    id: enhancement-description
+    attributes:
+      label: What happens?
+      description: A clear and concise description of what the enhancement is.
+    validations:
+      required: true
+
+  - type: upload
+    id: screenshots
+    attributes:
+      label: screenshots
+      description: |
+        Please provide any visuals that can help us understand the ask.
+    validations:
+      required: false

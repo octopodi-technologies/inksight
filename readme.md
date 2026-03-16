@@ -8,6 +8,11 @@ Octopodi Inksight is an award winning education technology platform designed to 
 
 Unlike traditional grading tools that only check whether code works or detect plagiarism, Octopodi Inksight analyzes patterns set by the educator. This allows instructors to quickly see where students are struggling, identify common mistakes, and provide meaningful feedback at scale.
 
+## Releases
+
+Octopodi Inksight is distributed using GitHub release.
+[Here is a link to the latest release](https://github.com/octopodi-technologies/inksight/releases/latest/) which can also be found by navigating to the "Releases" section.
+
 ## Awards
 
 <table>

@@ -16,12 +16,15 @@ Unlike traditional grading tools that only check whether code works or detect pl
   <tbody>
     <tr>
       <td align="center" valign="middle">
+        <a href="https://www.riipen.com/levelup" target="_blank">
+          <img src="./assets/partners/ripen.svg" alt="ripen level up" width="283">
+        </a>
+      </td>
+      <td align="center" valign="middle">
         <a href="https://www.acceleratorcentre.com/" target="_blank">
-          <img src="./assets/partners/accelerator_center.svg" alt="accelerator_center" width="283">
+          <img src="./assets/partners/accelerator_center.svg" alt="accelerator center" width="283">
         </a>
       </td>
     </tr>
   </tbody>
 </table>
-![Alt text](./assets/partners/ripen.svg)
-![Alt text](./assets/partners/accelerator_center.svg)

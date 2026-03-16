@@ -1,4 +1,4 @@
-# Octopodi Inksight
+<img src="assets/banner/octopodi_inksight_banner.svg" alt="Octopodi Inksight" />
 
 Where AI Meets Instructor Insight.
 

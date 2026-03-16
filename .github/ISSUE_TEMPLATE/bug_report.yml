@@ -1,0 +1,74 @@
+name: "🐛 Bug Report"
+description: We broke something, again
+title: "[Bug]: "
+labels: ["triage", "bug"]
+body:
+  - type: checkboxes
+    id: os-type
+    attributes:
+      label: Operating System
+      description: What operating system are you running? Select all that apply.
+      options:
+        - label: Windows 11
+        - label: Windows 10
+        - label: MacOs Tahoe (Current)
+        - label: MacOs Sequoia
+        - label: MacOs Sonoma
+        - label: Linux Debian
+        - label: Linux RHEL (fedora, etc)
+        - label: Linux Arch
+    validations:
+      required: true
+
+  - type: textarea
+    id: bug-steps
+    attributes:
+      label: What are the steps to reproduce this issue?
+      placeholder: |
+        1.
+        2.
+        3.
+    validations:
+      required: true
+
+  - type: textarea
+    id: bug-description
+    attributes:
+      label: What happens?
+      description: A clear and concise description of what the bug is.
+    validations:
+      required: true
+
+  - type: textarea
+    id: bug-expectation
+    attributes:
+      label: What were you expecting to happen?
+      description: A clear and concise description of what was supposed to happen.
+    validations:
+      required: true
+
+  - type: textarea
+    id: aditional-context
+    attributes:
+      label: Additional context
+      description: Add any other context you can provide about the problem here.
+    validations:
+      required: false
+
+  - type: upload
+    id: logs
+    attributes:
+      label: Logs
+      description: |
+        Please go to Settings in the top right corner of the application > Export Logs > Drag & Drop here
+    validations:
+      required: true
+
+  - type: upload
+    id: screenshots
+    attributes:
+      label: screenshots
+      description: |
+        Please provide any screen shots that will help us understand the bug.
+    validations:
+      required: false

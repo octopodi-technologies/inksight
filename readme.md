@@ -10,6 +10,18 @@ Unlike traditional grading tools that only check whether code works or detect pl
 
 ## Awards
 
+<table style="border: 0;">
+  <tbody>
+    <tr>
+      <td align="center" valign="middle" style="border: 0;">
+        <a href="https://pitchbattleroyale.com/competition-winners/octopodi-technologies" target="_blank">
+          <img src="https://cdn.prod.website-files.com/66a8145d4a19f376f3eb1b99/694709443dae77e229f8a417_PBR%20Logo%20Black%20Landscape%20-%20Transparent%20Background.png" alt="accelerator center" width="283">
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 ## Partners
 
 <table style="border: 0;">

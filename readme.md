@@ -27,7 +27,7 @@ Unlike traditional grading tools that only check whether code works or detect pl
     <tr>
       <td align="center" valign="middle">
         <a href="https://pitchbattleroyale.com/competition-winners/octopodi-technologies" target="_blank">
-          <img src="./assets/awards/start_up_grind_champs.webp" alt="accelerator center" width="283">
+          <img src="./assets/awards/start_up_grind_champs.webp" alt="accelerator center" width="283" height="283">
         </a>
       </td>
     </tr>
@@ -57,8 +57,8 @@ Unlike traditional grading tools that only check whether code works or detect pl
     </tr>
     <tr>
       <td align="center" valign="middle">
-        <a href="https://students.wlu.ca/career-and-experiential-learning/entrepreneurship/startup-lab/index.html" target="_blank">
-          <img src="./assets/partners/laurier_starup_lab.jpg" alt="accelerator center" width="283">
+        <a href="https://www.foundersbeta.com/" target="_blank">
+          <img src="./assets/partners/FoundersBeta-Logo-Transparent.png" alt="accelerator center" width="283">
         </a>
       </td>
     </tr>

@@ -54,6 +54,11 @@ Unlike traditional grading tools that only check whether code works or detect pl
           <img src="./assets/partners/KWCOC_Hori_RGB.png" alt="accelerator center" width="283">
         </a>
       </td>
+      <td align="center" valign="middle">
+        <a href="https://proton.me/" target="_blank">
+          <img src="./assets/partners/proton_logo.svg" alt="accelerator center" width="283">
+        </a>
+      </td>
     </tr>
   </tbody>
 </table>

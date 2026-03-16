@@ -61,6 +61,11 @@ Unlike traditional grading tools that only check whether code works or detect pl
           <img src="./assets/partners/FoundersBeta-Logo-Transparent.png" alt="accelerator center" width="283">
         </a>
       </td>
+      <td align="center" valign="middle">
+        <a href="https://greaterkwchamber.com/membership/business-directory/#/action/Listing/value/40588/searchID/2490536/cid/325/id/1/Octopodi-Technologies" target="_blank">
+          <img src="./assets/partners/KWCOC_Hori_RGB.png" alt="accelerator center" width="283">
+        </a>
+      </td>
     </tr>
   </tbody>
 </table>

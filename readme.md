@@ -8,18 +8,6 @@ Octopodi Inksight is an award winning education technology platform designed to 
 
 Unlike traditional grading tools that only check whether code works or detect plagiarism, Octopodi Inksight analyzes patterns set by the educator. This allows instructors to quickly see where students are struggling, identify common mistakes, and provide meaningful feedback at scale.
 
-<table>
-  <tbody>
-    <tr>
-      <td align="center" valign="middle">
-        <a href="https://pitchbattleroyale.com/competition-winners/octopodi-technologies" target="_blank">
-          <img src="https://cdn.prod.website-files.com/66a8145d4a19f376f3eb1b99/694709443dae77e229f8a417_PBR%20Logo%20Black%20Landscape%20-%20Transparent%20Background.png" alt="accelerator center" width="283">
-        </a>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
 ## Awards
 
 <table>

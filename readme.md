@@ -41,7 +41,7 @@ Unlike traditional grading tools that only check whether code works or detect pl
     <tr>
       <td align="center" valign="middle">
         <a href="https://www.riipen.com/levelup" target="_blank">
-          <img src="./assets/partners/Level_UP_Logo.png" alt="ripen level up" width="283">
+          <img src="./assets/partners/ripen.svg" alt="ripen level up" width="283">
         </a>
       </td>
       <td align="center" valign="middle">

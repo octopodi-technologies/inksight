@@ -1,0 +1,124 @@
+name: Sync Issues to Development
+
+on:
+  issues:
+    types: [labeled]
+
+jobs:
+  sync-issue:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get issue id of confirmed issue (when the issue_confirmed label is added)
+        id: target_issue
+        run: |
+          added="${{ github.event.label.name }}"
+          if [ "$added" != "issue_confirmed" ]; then
+            echo "Label is not 'issue_confirmed'; skipping."
+            exit 0
+          fi
+          echo "ISSUE_NUMBER=${{ github.event.issue.number }}" >> $GITHUB_ENV
+
+      - name: Get Octopodi issue with inksight label if any
+        id: find_octopodi_issue_if_any
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.WATCHER_ISSUE_SYNC }}
+          script: |
+            return github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: "octopodi",
+              type: "Inksight Bug",
+              labels: ["inksight"],
+            });
+
+      - name: Parse Octopodi Issues if found.
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.WATCHER_ISSUE_SYNC }}
+          script: |
+            const v = await github.rest.repos.get({
+              owner: context.repo.owner,
+              repo: "octopodi",
+            });
+            console.log(v);
+            const issueNumber = process.env.ISSUE_NUMBER;
+            const octopodiIssues = ${{ steps.find_octopodi_issue_if_any.outputs.result }}.data;
+            const foundIssue = octopodiIssues.filter(issue =>  issue.title.includes(`[Inksight Bug::${issueNumber}]`));
+            if (foundIssue.length === 0) {
+              return "false";
+            } else if (foundIssue.length > 1) {
+              console.error(`There is more than one issue with the title tag [Inksight Bug::${issueNumber}]. This should never happen.`);
+              console.error(`The issues are: ${JSON.stringify(foundIssue)}`);
+              return "error";
+            } else {
+              console.log(`This issue has been created already. ${foundIssue[0].url}`);
+              return "true";
+            }
+
+      - name: Stop pipeline if the issue already exists
+        if: ${{ steps.find_octopodi_issue_if_any.outputs.result == 'true' }}
+        run: |
+          echo "The corresponding issue already exists"
+          exit 0
+
+      - name: Fail pipeline due to too many issues
+        if: ${{ steps.find_octopodi_issue_if_any.outputs.result == 'error' }}
+        run: |
+          echo "Check the 'GetOctpodi issue if any' step to see the error"
+          exit 1
+      - name: Create issue on Octopodi
+        id: create_issue_on_octopodi
+        if: ${{ steps.find_octopodi_issue_if_any.outputs.result == 'false' }}
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.WATCHER_ISSUE_SYNC }}
+          script: |
+            const { issue, title }= JSON.parse(process.env.GITHUB_CONTEXT);
+            const issueNumber = process.env.ISSUE_NUMBER;
+            const octopodiTitle = `[Inksight Bug::${issueNumber}]${issue.title.replace("[Bug]", "")}`;
+            const body = issue.body;
+            return await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: "Octopodi",
+              title: octopodiTitle,
+              body,
+              type: "Inksight Bug",
+              labels: ["inksight"],
+            });
+
+      - name: Create issue on Octopodi
+        if: ${{ steps.find_octopodi_issue_if_any.outputs.result == 'false' }}
+        uses: actions/github-script@v7
+        env:
+          CREATED_ISSUE: ${{ steps.create_issue_on_octopodi.outputs.result }}
+        with:
+          github-token: ${{ secrets.WATCHER_ISSUE_SYNC }}
+          script: |
+            const issueNumber = ${{ steps.create_issue_on_octopodi.outputs.result }}.number;
+            const orgIssueFields = await octokit.request('GET /orgs/{org}/issue-fields', {
+              org: 'octopodi-technologies',
+              headers: {
+                'X-GitHub-Api-Version': '2026-03-10'
+              }
+            });
+            const issueField = orgIssueFields.data.filter(field => field.name === "Linkage Id");
+
+            if (issueField.length === 0) {
+              throw new Error("'Linkage Id' Issue field is not found on 'octopodi-technologies' organization");
+            } else if (issueField.length > 1) {
+              throw new Error(`'Linkage Id' is the name of multiple (${issueField.length}) Issue fields on the  'octopodi-technologies' organization.`);
+            }
+            const issueFieldId = issueField[0].id;
+            const v = await github.request(
+              'PUT /repositories/{repository_id}/issues/{issue_number}/issue-field-values', {
+                repository_id: 'REPOSITORY_ID',
+                issue_number: issueNumber,
+                issue_field_values: [
+                  {
+                    field_id: issueFieldId,
+                    value: github.event.issue.number,
+                  },
+                ],
+              }
+            );
+            console.log(v);

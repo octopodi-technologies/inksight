@@ -21,6 +21,13 @@ Octopodi Inksight is distributed using GitHub release.
 
 <table>
   <tbody>
+  <tr>
+      <td align="center" valign="middle">
+        <a href="https://www.foundersbeta.com/top-100/" target="_blank">
+          <img src="./assets/awards/founds_beta_top_100_2026.png" alt="founders beta top 100" width="283" height="283">
+        </a>
+      </td>
+    </tr>
     <tr>
       <td align="center" valign="middle">
         <a href="https://pitchbattleroyale.com/competition-winners/octopodi-technologies" target="_blank">

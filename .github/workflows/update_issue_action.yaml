@@ -9,7 +9,25 @@ on:
     ]
 
 jobs:
+  actor-check:
+    runs-on: ubuntu-latest
+    outputs:
+      PROCEED: ${{ steps.gate.outputs.PROCEED }}
+    steps:
+      - name: Check if the logger is myself.
+        id: gate
+        env:
+          GITHUB_ACTOR: ${{ toJSON(github.event.login.user) }}
+        run: |
+          if [ "$GITHUB_ACTOR" = "thewatcherof8feets" ]; then
+            echo "PROCEED=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "PROCEED=false" >> "$GITHUB_OUTPUT"
+          fi
+
   sync-issue-updates:
+    needs: actor-check
+    if: ${{ needs.actor-check.outputs.PROCEED == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - name: Get issue id of confirmed issue (when the issue_confirmed label is added)
@@ -17,6 +35,7 @@ jobs:
         run: |
           echo "ISSUE_NUMBER=${{ github.event.issue.number }}" >> $GITHUB_ENV
           echo "TRIGGER_ACTION=${{ github.event.action }}" >> $GITHUB_ENV
+          echo "TRIGGER_PERSON=${{ github.event.issue.user.login }}" >> $GITHUB_ENV
 
       - name: Get Issue Fields on context
         id: get_issue_fields_on_context

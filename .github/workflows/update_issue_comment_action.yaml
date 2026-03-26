@@ -1,12 +1,8 @@
-name: Sync updates to Development ticket
+name: Sync comments to Development ticket
 
 on:
-  issues:
-    types: [
-      opened, edited, deleted, transferred, pinned, unpinned,
-      closed, reopened, assigned, unassigned, locked, unlocked,
-      milestoned, demilestoned, typed, untyped,
-    ]
+  issue_comment:
+    {}
 
 jobs:
   sync-issue-updates:
@@ -16,7 +12,6 @@ jobs:
         id: target_issue
         run: |
           echo "ISSUE_NUMBER=${{ github.event.issue.number }}" >> $GITHUB_ENV
-          echo "TRIGGER_ACTION=${{ github.event.action }}" >> $GITHUB_ENV
 
       - name: Get Issue Fields on context
         id: get_issue_fields_on_context
@@ -77,20 +72,49 @@ jobs:
         with:
           github-token: ${{ secrets.WATCHER_ISSUE_SYNC }}
           script: |
-            const { changes } = JSON.parse(process.env.GITHUB_CONTEXT);
-            const body = [`An update has been made on Inksight: ${process.env.TRIGGER_ACTION}.`]
-            if (process.env.TRIGGER_ACTION === "edited") {
-              body.push("The Description has Changed.");
-              Object.entries(changes).forEach(entry => {
-                const [ key, value ] = entry;
-                console.log(key);
-                console.log(value);
-                body.push(`> ${key}`);
-                body.push(`>> ${value.from}`);
-              });
+            const githubContext = JSON.parse(process.env.GITHUB_CONTEXT);
+            console.log(githubContext);
+            const { action, comment } = githubContext;
+            const { user } = comment;
+            const body = [];
+            switch (action) {
+              case "created":
+                body.push(`${user.login} has created a comment.`);
+                body.push("```");
+                body.push(comment.body);
+                body.push("```");
+                break;
+              case "deleted":
+                body.push(`${user.login} has deleted this comment:`);
+                body.push("```");
+                body.push(comment.body);
+                body.push("```");
+                break;
+              case "edited":
+                body.push(`${user.login} has edited a comment.`);
+                body.push("from:");
+                body.push("```");
+                body.push(githubContext.changes.body.from);
+                body.push("```");
+                body.push("to:");
+                body.push("```");
+                body.push(comment.body)
+                body.push("```");
+                break;
+              case "pinned":
+                body.push(`${user.login} has pinned a comment.`);
+                body.push("```");
+                body.push(comment.body);
+                body.push("```");
+                break;
+              case "unpinned":
+                body.push(`${user.login} has unpinned a comment.`);
+                body.push("```");
+                body.push(comment.body);
+                body.push("```");
+                break;
             }
             const stringifiedBody = body.join("\n");
-            console.log(stringifiedBody);
             await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: "octopodi",

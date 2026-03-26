@@ -77,17 +77,18 @@ jobs:
         with:
           github-token: ${{ secrets.WATCHER_ISSUE_SYNC }}
           script: |
-            const { changes } = JSON.parse(process.env.GITHUB_CONTEXT);
+            const { changes, issue } = JSON.parse(process.env.GITHUB_CONTEXT);
             const body = [`An update has been made on Inksight: ${process.env.TRIGGER_ACTION}.`]
             if (process.env.TRIGGER_ACTION === "edited") {
               body.push("The Description has Changed.");
-              Object.entries(changes).forEach(entry => {
-                const [ key, value ] = entry;
-                console.log(key);
-                console.log(value);
-                body.push(`> ${key}`);
-                body.push(`>> ${value.from}`);
-              });
+              body.push("from:");
+              body.push("```");
+              body.push(changes.body.from);
+              body.push("```");
+              body.push("to:");
+              body.push("```");
+              body.push(issue.body)
+              body.push("```");
             }
             const stringifiedBody = body.join("\n");
             console.log(stringifiedBody);
